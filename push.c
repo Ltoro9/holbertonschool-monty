@@ -12,10 +12,16 @@ void push(stack_t **stack, unsigned int line_number)
 	int num;
 	stack_t *new_node;
 	size_t i = 0;
-	
+
+	if (arg == NULL)
+	{
+		fprintf(stderr, "L%d: usage: push integer1\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
 	while (arg[i] != '\0')
 	{
-		if (!isdigit(arg[i]))
+		if (!isdigit(arg[i]) && !(arg[i] == '-'))
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
