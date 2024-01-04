@@ -11,11 +11,16 @@ void push(stack_t **stack, unsigned int line_number)
 	char *arg = strtok(NULL, " \n");
 	int num;
 	stack_t *new_node;
-
-	if (arg == NULL || *arg == '\0' || !isdigit(*arg))
+	size_t i = 0;
+	
+	while (arg[i] != '\0')
 	{
-		fprintf(stderr, "Line%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		if (!isdigit(arg[i]))
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 
 	num = atoi(arg);
