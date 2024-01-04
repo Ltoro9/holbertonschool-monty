@@ -19,6 +19,12 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	if (arg[0] == '-' && arg[1] == '\0')
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
 	while (arg[i] != '\0')
 	{
 		if (!isdigit(arg[i]) && !(arg[i] == '-'))
