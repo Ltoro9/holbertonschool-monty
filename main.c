@@ -35,7 +35,10 @@ int main(int argc, char *argv[])
 		instruction_t my_instructions[] = {
 			{"push", push},
 			{"pall", pall},
+			{"pint", pint},
 			{"pop", pop},
+			{"nop", nop},
+			{"swap", swap},
 			{NULL, NULL}
 		};
 		
