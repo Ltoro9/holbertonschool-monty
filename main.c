@@ -16,6 +16,12 @@ int main(int argc, char *argv[])
 		return EXIT_FAILURE;
 	}
 
+	if (argv[1] == NULL) /*If the user does not give any file or more than one argument, print error message*/
+	{
+		fprintf(stderr, "USAGE: monty file\n")
+			exit(EXIT_FAILURE);
+	}
+
 	file = fopen(argv[1], "r"); /*Open the file specified in the argument*/
 	if (file == NULL)
 	{
@@ -42,7 +48,7 @@ int main(int argc, char *argv[])
 			{"add", add},
 			{NULL, NULL}
 		};
-		
+
 		i = 0;
 		while (my_instructions[i].opcode != NULL) /*Search for the instruction in the array*/
 		{
