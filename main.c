@@ -16,6 +16,12 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	if (argv[1] == NULL)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+
 	file = fopen(argv[1], "r"); /*Open the file specified in the argument*/
 	if (file == NULL)
 	{
