@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 			{"pall", pall},
 			{"pint", pint},
 			{"pop", pop},
+			{"nop", nop},
 			{NULL, NULL}
 		};
 		
