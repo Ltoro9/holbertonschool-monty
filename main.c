@@ -20,9 +20,6 @@ int main(int argc, char *argv[])
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		free(line);
-		fclose(file);
-		free_stack(&stack);
 		exit(EXIT_FAILURE);
 	}
 
