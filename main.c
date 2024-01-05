@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 	while ((getline(&line, &len, file)) != -1) /*Read lines from the file until the end*/
 	{
 		line_number++;
-		line[strlen(line) - 1] = '\0';
 		opcode = strtok(line, " \n"); /*Tokenize the line to get the instruction (opcode)*/
 		if (opcode == NULL || *opcode == '#')
 		{
