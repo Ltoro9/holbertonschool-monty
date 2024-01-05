@@ -16,16 +16,13 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	if (argv[1] == NULL)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-
 	file = fopen(argv[1], "r"); /*Open the file specified in the argument*/
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		free(line);
+		fclose(file);
+		free_stack(&stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -73,5 +70,5 @@ int main(int argc, char *argv[])
 	free(line);
 	fclose(file);
 	free_stack(&stack);
-	return EXIT_SUCCESS;
+	return (0);
 }
