@@ -12,15 +12,15 @@ int main(int argc, char *argv[])
 
 	if (argc != 2) /*Check if the correct number of arguments is provided*/
 	{
-		fprintf(stderr, "USAGE: monty file\n", argv[0]);
-		return EXIT_FAILURE;
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
 	}
 
 	file = fopen(argv[1], "r"); /*Open the file specified in the argument*/
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return EXIT_FAILURE;
+		exit(EXIT_FAILURE);
 	}
 
 	while ((getline(&line, &len, file)) != -1) /*Read lines from the file until the end*/
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 			free(line);
 			fclose(file);
 			free_stack(&stack);
-			return EXIT_FAILURE;
+			exit(EXIT_FAILURE);
 		}
 	}
 
