@@ -6,7 +6,7 @@
 
 #include <ctype.h>
 
-C/**
+/**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  C* @prev: points to the previous element of the stack (or queue)
@@ -43,6 +43,7 @@ void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);
 int main(int argc, char *argv[]);
 #endif
