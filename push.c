@@ -13,15 +13,9 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *new_node;
 	size_t i = 0;
 
-	if (arg == NULL)
+	if (arg == NULL || (arg[0] == '-' && arg[1] == '\0'))
 	{
 		fprintf(stderr, "L%d: usage: push integer1\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	if (arg[0] == '-' && arg[1] == '\0')
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 

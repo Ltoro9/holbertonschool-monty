@@ -1,13 +1,21 @@
 #include "monty.h"
-
+#include "instructions.h"
+/**
+ * main - Entry point for Monty interpreter
+ * @argc: Number of arguments
+ * @argv: Array of arguments passed to the program
+ *
+ * Return: Always 0 on success
+ */
 int main(int argc, char *argv[])
 {
-	FILE *file;
+	instruction_t *my_instructions = get_instructions();
+	FILE *file = fopen(argv[1], "r");
 	char *line = NULL;
+	char *opcode = NULL;
 	size_t len = 0;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL; /*Initialize the stack*/
-	char *opcode = NULL; /*Tokenize the line to get the instruction (opcode)*/
 	int i;
 
 	if (argc != 2) /*Check if the correct number of arguments is provided*/
@@ -15,57 +23,32 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
-	file = fopen(argv[1], "r"); /*Open the file specified in the argument*/
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
-	while ((getline(&line, &len, file)) != -1) /*Read lines from the file until the end*/
+	while ((getline(&line, &len, file)) != -1)
 	{
 		line_number++;
-		opcode = strtok(line, " \n"); /*Tokenize the line to get the instruction (opcode)*/
+		opcode = strtok(line, " \n");
 		if (opcode == NULL || *opcode == '#')
-		{
 			continue; /*Ignore empty lines*/
-		}
-
-		instruction_t my_instructions[] = {
-			{"push", push},
-			{"pall", pall},
-			{"pint", pint},
-			{"pop", pop},
-			{"nop", nop},
-			{"swap", swap},
-			{"add", add},
-			{NULL, NULL}
-		};
-
-		i = 0;
-		while (my_instructions[i].opcode != NULL) /*Search for the instruction in the array*/
+		for (i = 0; my_instructions[i].opcode != NULL; i++)
 		{
 			if (strcmp(opcode, my_instructions[i].opcode) == 0)
 			{
 				my_instructions[i].f(&stack, line_number);
 				break;
 			}
-			i++;
 		}
-
 		if (my_instructions[i].opcode == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-			free(line);
-			fclose(file);
-			free_stack(&stack);
+			cleanup_resources(file, line, &stack);
 			exit(EXIT_FAILURE);
 		}
 	}
-
-	free(line);
-	fclose(file);
-	free_stack(&stack);
+	cleanup_resources(file, line, &stack);
 	return (0);
 }
